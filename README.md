@@ -1,4 +1,3 @@
 # Simulacion-de-sistemas
-por ahora no se
 
-ah ok
+curso maestria ing. sistemas
