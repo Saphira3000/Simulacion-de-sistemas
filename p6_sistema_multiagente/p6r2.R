@@ -98,9 +98,9 @@ for (replica in 1:5) {
             aI <- agentes[agentes$estado == "I",]
             aR <- agentes[agentes$estado == "R",]
         }
+		m <- max(epidemia)
+    	resultados <- rbind(resultados, c(pi, 100 * m / n))
     }
-	m <- max(epidemia)
-    resultados <- rbind(resultados, c(pi, 100 * m / n))
 }
 stopImplicitCluster()
 
