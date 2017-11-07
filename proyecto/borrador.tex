@@ -1,0 +1,27 @@
+El modelo de Lotka-Volterra es un sistema de ecuaciones diferenciales de primer orden no lineales que se usa para describir la dinamica de un ecosistema en el que dos especies interactuan (presa y depredador)
+
+El modelo se escribe de la siguiente forma:
+dS/dt = S(a-bF)
+dF/dt = -F(c-dS) 
+a, b, c, d son parametros positivos que representan las interacciones de las especies.
+
+%-----------------------------------------
+
+
+Se simula el modelo de Lotka-Volterra, mejor conocido como modelo depredador-presa utilizando un sistema multi-agente.
+Se consideran dos estados: lobos y ovejas.
+
+Al inicio tengo N = f + s
+N poblacion total inicial
+f poblacion lobos (foxes)
+s poblacion ovejas (sheeps)
+
+Los lobos comeran a las ovejas que se encuentren en cierto rango
+
+Si comen: aumenta poblacion lobos y disminuye ovejas
+Si NO comen: disminuye polacion
+
+Si NO son comidos: aumenta poblacion ovejas
+
+
+
