@@ -4,6 +4,7 @@ El modelo se escribe de la siguiente forma:
 dS/dt = S(a-bF)
 dF/dt = -F(c-dS) 
 a, b, c, d son parametros positivos que representan las interacciones de las especies.
+(Foxes and sheeps)
 
 %-----------------------------------------
 
@@ -12,7 +13,7 @@ Se simula el modelo de Lotka-Volterra, mejor conocido como modelo depredador-pre
 Se consideran dos estados: lobos y ovejas.
 
 Al inicio tengo N = f + s
-N poblacion total inicial
+N poblacion inicial total
 f poblacion lobos (foxes)
 s poblacion ovejas (sheeps)
 
@@ -23,5 +24,35 @@ Si NO comen: disminuye polacion
 
 Si NO son comidos: aumenta poblacion ovejas
 
+%-----------------------------------------
 
+Para la velocidad, se debe tomar en cuenta la especie
+Tomar en cuenta tamaño de ambas especies
+Considerar hembras y machos para que se logre reproduccion
+Hembra embarazada debe vivir cierto tiempo para que haya crias
+Lobos grandes necesitan mas alimento
+Considera pasto
+Y si las ovejas intentan escapar del lobo??
+Lobos no comeran todo el tiempo, comen y luego descanzan
+Puedo simplificar para no complicarme con el emparejamiento y suponer que todos se reproducen milagrosamente solos
 
+OBJETIVO:
+una vez hecha la simulacion, se desea observar si esta tiene el mismo comportamiento que se observa de las ecuaciones
+
+Resutados numericos mandarlos a un archivo
+
+Antecedentes del tema
+Que desarrolle
+Experimentacion
+Resultados
+Conclusiones
+
+En el repo va todo lo que yo produzco
+
+%------------------------------------------
+
+El comportamiento que se desea obtener es el siguiente:
+
+- Si no hay depredador, el crecimiento de las presas se da de manera exponencial
+- Si no hay alimento, la muerte del depredador se da de manera exponencial
+- Ciclos: si el depredador come mucho, cada vez habra menos alimento, asi que comenzaran a morir. Una vez que disminuya la poblacion de depredadores, la poblacion de presas incrementa ya que no hay quien se las coma.
