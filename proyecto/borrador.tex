@@ -6,6 +6,11 @@ dF/dt = -F(c-dS)
 a, b, c, d son parametros positivos que representan las interacciones de las especies.
 (Foxes and sheeps)
 
+a constante de crecimiento (intrinseca) de S
+c tasa de muerte de F
+b interaccion entre dos especies desfavorables para la presa (signo -)
+d interaccion favorable para el depredador
+
 %-----------------------------------------
 
 
@@ -56,3 +61,32 @@ El comportamiento que se desea obtener es el siguiente:
 - Si no hay depredador, el crecimiento de las presas se da de manera exponencial
 - Si no hay alimento, la muerte del depredador se da de manera exponencial
 - Ciclos: si el depredador come mucho, cada vez habra menos alimento, asi que comenzaran a morir. Una vez que disminuya la poblacion de depredadores, la poblacion de presas incrementa ya que no hay quien se las coma.
+
+%-------------------------------------------
+
+14 noviembre
+Primero que funcione, luego veo hacerlo efectivo
+incluso podria agregarlo a reporte
+
+Pensar un a funcion tipo sierra que me dice las ganas de comer de los lobos (pueden compartir comida!!)
+(que dependa del tiempo)
+Sino come: incrementa su hambre 
+Si come: disminuye
+Si llega a un limite su hambre: darle cuello
+Incluir si se puede:
+- resistencia del animal (puede que sobrepase limite de hambre y no muera)
+- tamano lobos y ovejas (la disminucion del hambre dependera del tamano de la oveja y si fue compartida o no)
+- lobos grandes necesitan mas alimento que lobos pequenos
+Sino se hace, considerarlo como trabajo a futuro
+
+¿Qu\'e hace mi co\'odigo hasta ahora?
+- Se crea una poblaci\'on inicial con cierta cantidad de individuos
+- De manera aleatoria se decide quien come y quien no (version 1.0 solo lobos comen)
+- Para los lobos que van a comer, se revisa la distancia con todas las ovejas, las que queden dentro de un radio seran comidad
+- Actualizo poblacion
+- Reproduzco las ovejas
+- Reproduzco y mato lobos
+- movimiento (desplazamiento)
+
+%--------------------------------------------
+
