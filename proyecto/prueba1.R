@@ -44,11 +44,12 @@ while (nchar(tl) < digitos) {
 }
 png(paste("lotka_t", tl, ".png", sep=""))
 plot(l, type="n", xlim=c(0, l), ylim=c(0, l), xlab="x", ylab="y", main="Poblaci\u{F3}n inicial")
+rect(0, 0, l, l, col = "green")
 if (dim(iL)[1] > 0) {
     points(iL$x, iL$y, pch=15, col="black")
 }
 if (dim(iO)[1] > 0) {
-    points(iO$x, iO$y, pch=16, col="blue")
+    points(iO$x, iO$y, pch=16, col="white")
 }
 graphics.off()
 
@@ -140,12 +141,13 @@ for (tiempo in 1:tmax) {
         paso <- paste("Paso", tiempo)
         png(salida)
         plot(l, type="n", xlim=c(0, l), ylim=c(0, l), xlab="x", ylab="y", main=paso)
-        #rect(0, l, 0, l, col = "green")
+        #box("outer", col="green")
+        rect(0, 0, l, l, col = "green")
         if (dim(iL)[1] > 0) {
             points(iL$x, iL$y, pch=15, col="black")
         }
         if (dim(iO)[1] > 0) {
-            points(iO$x, iO$y, pch=16, col="blue")
+            points(iO$x, iO$y, pch=16, col="white")
         }
         graphics.off()
         
