@@ -94,16 +94,16 @@ for (tiempo in 1:tmax) {
       ind$x <- ind$x + ind$dx
       ind$y <- ind$y + ind$dy
       if (ind$x > l) {
-        ind$x <- ind$x - l
+        ind$x <- ind$x - (l/10)
       }
       if (ind$y > l) {
-        ind$y <- ind$y - l
+        ind$y <- ind$y - (l/10)
       }
       if (ind$x < 0) {
-        ind$x <- ind$x + l
+        ind$x <- ind$x + (l/10)
       }
       if (ind$y < 0) {
-        ind$y <- ind$y + l
+        ind$y <- ind$y + (l/10)
       }
       poblacion[i, ] <- ind
     }
