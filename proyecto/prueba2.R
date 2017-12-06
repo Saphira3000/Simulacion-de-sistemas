@@ -10,11 +10,13 @@ gama <- 0.3 # probabilidad muerte lobos
 bet <- 0.2 # muerte de ovejas
 
 v <- l/30 # tamano de paso
-
 poblacion <- data.frame(x = double(), y = double(), dx = double(), dy = double(), especie  = character())
 
-plobosi <- numeric() # porcentaje poblacion lobos a lo largo del tiempo
-povejasi <- numeric() # porcentaje poblacion ovejas a lo largo del tiempo
+plobos <- numeric() # poblacion lobos a lo largo del tiempo
+povejas <- numeric() # poblacion ovejas a lo largo del tiempo
+
+plobosi <- numeric() 
+povejasi <- numeric()
 
 # INICIO
 for (i in 1:n) {
@@ -28,17 +30,17 @@ for (i in 1:n) {
 iL <- poblacion[poblacion$especie == "L",]
 iO <- poblacion[poblacion$especie == "O",]
 
-tmax <- 60
+tmax <- 30
 digitos <- floor(log(tmax, 10)) + 1
 
-#system("rm -f lotka_t*.png")
-#system("rm -f por_poblacion_t*.png")
+system("rm -f pr2_lotka_t*.png")
+system("rm -f pr2_poblacion_t*.png")
 
 tl <- "0"
 while (nchar(tl) < digitos) {
   tl <- paste("0", tl, sep="")
 }
-png(paste("lotka_t", tl, ".png", sep=""))
+png(paste("pr2_lotka_t", tl, ".png", sep=""))
 plot(l, type="n", xlim=c(0, l), ylim=c(0, l), xlab="x", ylab="y", main="Poblaci\u{F3}n inicial")
 rect(0, 0, l, l, col = "green")
 if (dim(iL)[1] > 0) {
@@ -116,11 +118,10 @@ for (tiempo in 1:tmax) {
     while (nchar(tl) < digitos) {
       tl <- paste("0", tl, sep="")
     }
-    salida <- paste("lotka_t", tl, ".png", sep="")
+    salida <- paste("pr2_lotka_t", tl, ".png", sep="")
     paso <- paste("Paso", tiempo)
     png(salida)
     plot(l, type="n", xlim=c(0, l), ylim=c(0, l), xlab="x", ylab="y", main=paso)
-    #box("outer", col="green")
     rect(0, 0, l, l, col = "green")
     if (dim(iL)[1] > 0) {
       points(iL$x, iL$y, pch=15, col="black")
@@ -130,24 +131,20 @@ for (tiempo in 1:tmax) {
     }
     graphics.off()
     
-    # porcentaje poblaciones
-    # total = dim(poblacion[poblacion$especie,])[1]
-    
-    print(tiempo)
-     lobos = dim(iL)[1]
-     ovejas = dim(iO)[1]
-     print(c(lobos, ovejas))
-    # plobos <- c(plobos, 100 * lobos / total)
-    # povejas <- c(povejas, 100 * ovejas / total)
-    # png(paste("por_poblacion_t", tl, ".png", sep=""), width=600, height=300)
-    # plot(1:tiempo, plobos, xlim=c(0, tmax), ylim=c(0, 100), xlab="Tiempo", ylab="Porcentaje poblaci\u{F3}n", col = "red")
-    # points(1:tiempo, povejas, xlim=c(0, tmax), ylim=c(0, 100), pch=16, col = "blue")
-    # graphics.off()
+    lobos = dim(iL)[1]
+    ovejas = dim(iO)[1]
+
+    plobos <- c(plobos, lobos)
+    povejas <- c(povejas, ovejas)
+    png(paste("pr2_poblacion_t", tl, ".png", sep=""), width=600, height=300)
+    plot(1:tiempo, plobos, xlim=c(0, tmax), ylim=c(0, 1.5*n), xlab="Tiempo", ylab="Poblaci\u{F3}n", col = "red")
+    points(1:tiempo, povejas, xlim=c(0, tmax), ylim=c(0, 1.5*n), pch=16, col = "blue")
+    graphics.off()
   }
 }
 
-#system("convert -delay 50 -size 300x300 lotka_t*.png -loop 0 lotka.gif")
-#system("convert -delay 50 -size 300x300 por_poblacion_t*.png -loop 0 poblacion.gif")
+system("convert -delay 50 -size 300x300 pr2_lotka_t*.png -loop 0 pr2_lotka.gif")
+system("convert -delay 50 -size 300x300 pr2_poblacion_t*.png -loop 0 pr2_poblacion.gif")
 
 # rect(-0.9, 1.9, -0.5, 1.2, col = "magenta")
 #grid(nx = 1000, ny = 1000, col = "chartreuse", lty = "dotted",
