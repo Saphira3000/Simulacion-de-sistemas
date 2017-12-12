@@ -1,3 +1,0 @@
-\select@language {spanish}
-\beamer@sectionintoc {2}{Modelo depredador-presa}{3}{0}{1}
-\beamer@sectionintoc {3}{Version 1.0}{5}{0}{2}

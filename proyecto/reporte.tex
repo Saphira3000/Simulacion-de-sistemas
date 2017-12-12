@@ -1,145 +1,145 @@
-
-\documentclass[12pt, twocolumns]{article}
+\documentclass[12pt, twocolumn]{article}
 \usepackage{amsfonts}
 \usepackage{enumerate}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
-
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage[small]{caption}
+\usepackage{url}
+\usepackage{subfigure} 
 \setlength{\parskip}{\baselineskip}
 
-%% Use the option review to obtain double line spacing
-%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
-
-%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
-%% for a journal layout:
-%% \documentclass[final,1p,times]{elsarticle}
-%% \documentclass[final,1p,times,twocolumn]{elsarticle}
-%% \documentclass[final,3p,times]{elsarticle}
-%% \documentclass[final,3p,times,twocolumn]{elsarticle}
-%% \documentclass[final,5p,times]{elsarticle}
-%% \documentclass[final,5p,times,twocolumn]{elsarticle}
-
-%% For including figures, graphicx.sty has been loaded in
-%% elsarticle.cls. If you prefer to use the old commands
-%% please give \usepackage{epsfig}
-
-%% The amssymb package provides various useful mathematical symbols
-\usepackage{amssymb}
-%% The amsthm package provides extended theorem environments
-%% \usepackage{amsthm}
-
-%% The lineno packages adds line numbers. Start line numbering with
-%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
-%% for the whole article with \linenumbers.
-%% \usepackage{lineno}
-
-%\journal{Nuclear Physics B}
+\title{\bf Simulaci\'on de las ecuaciones de Lotka-Volterra empleando el sistema multiagente.}
+\author{G. S\'anchez$^{1\ast}$\\
+$^{1}$ {\small \textit{Posgrado en Ingenier\'ia de Sistemas, Universidad Aut\'onoma de Nuevo Le\'on}}\\ 
+{\small $^\ast$ Correo electr\'onico:  saphira3000@hotmail.es}\\
+}
+\date{}
 
 \begin{document}
+\pagestyle{empty}
 
-%\begin{frontmatter}
-
-%% Title, authors and addresses
-
-%% use the tnoteref command within \title for footnotes;
-%% use the tnotetext command for theassociated footnote;
-%% use the fnref command within \author or \address for footnotes;
-%% use the fntext command for theassociated footnote;
-%% use the corref command within \author for corresponding author footnotes;
-%% use the cortext command for theassociated footnote;
-%% use the ead command for the email address,
-%% and the form \ead[url] for the home page:
-%% \title{Title\tnoteref{label1}}
-%% \tnotetext[label1]{}
-%% \author{Name\corref{cor1}\fnref{label2}}
-%% \ead{email address}
-%% \ead[url]{home page}
-%% \fntext[label2]{}
-%% \cortext[cor1]{}
-%% \address{Address\fnref{label3}}
-%% \fntext[label3]{}
-
-\title{Simulaci\'on del modelo Lotka-Volterra}
-
-%% use optional labels to link authors explicitly to addresses:
-%% \author[label1,label2]{}
-%% \address[label1]{}
-%% \address[label2]{}
-
-\author{Gabriela S\'anchez Y.}
-
-%\address{gaby.saphira@gmail.com}
-
+\twocolumn[
+\begin{@twocolumnfalse}
+\maketitle
+\hrule
 \begin{abstract}
-
-Se simula el modelo Lotka-Volterra utilizando el enfoque de agentes m\'ultiples.
-
+En este trabajo se emplea un sistema multiagente para simular las ecuaciones de Lotka-Volterra. Se muestra el desempe\~no del enfoque y se compara con lo obtenido al resolver las ecuaciones de forma num\'erica.
 \end{abstract}
 
-%\begin{keyword}
-%% keywords here, in the form: keyword \sep keyword
+\vspace{2pt}
+\noindent\textit{Palabras clave:} 
+{\small Sistema multiagente; 
+Ecuaciones de Lotka-Volterra.}
+\vspace{8pt}
+\hrule
+\vspace{10pt}
+\end{@twocolumnfalse}]
 
-%% PACS codes here, in the form: \PACS code \sep code
 
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
-
-%\end{keyword}
-
-%\end{frontmatter}
-
-%% \linenumbers
-
-%% main text
 \section{Introducci\'on}
-%\label{}
+\label{sec:intro}
 
-% Indique los objetivos del trabajo y proporcione un contexto adecuado, evitando una encuesta bibliográfica detallada o un resumen de los resultados.
+Las ecuaciones de Lotka-Volterra son un sistema de ecuaciones de primer orden no lineales que se usan para describir la din\'amica de interacci\'on de dos especies, en donde una act\'ua como presa y la otra como predador.
 
-El sistema de Lotka-Volterra es un sistema de ecuaciones diferenciales de primer orden no lineales que se usa para describir la din\'amica de interacci\'on de dos especies en donde una act\'ua como presa y la otra como depredador.
-
-El modelo, conocido como depresador-presa, se escribe de la siguiente forma:
+El sistema, tambi\'en conocido como predador-presa, se escribe de la siguiente forma:
 \begin{equation}
 \begin{split}
-\frac{dS}{dt} = S(a-bF) \\
-\frac{dF}{dt} = -F(c-dS)
+\frac{dS}{dt} &= \alpha S - \beta SW \\
+\frac{dW}{dt} &= -\gamma W + \delta SW
 \end{split}
+\label{ecs lotka-volterra}
 \end{equation} 
-$a, b, c y d$ son parametros positivos que representan las interacciones de las especies.
+donde $\alpha, \beta, \gamma, \delta > 0$.
 
-El objetivo del trabajo es simular las ecuaciones de Lotka-Volterra utilizando el enfoque de multi-agentes. 
+El par\'ametro $\alpha$ representa el ritmo de crecimiento de las ovejas y $\beta$ la muerte de las mismas al interactuar con los lobos, $\gamma$ representa el ritmo de muerte de los lobos y $\delta$ el incremento en su poblaci\'on al interactuar con las ovejas. 
 
-\section*{Versi\'on 1.0}
+El objetivo del trabajo es simular las ecuaciones de Lotka-Volterra utilizando el enfoque de un sistema multiagente y hacer una comparaci\'on en cuanto a realismo, de lo obtenido de las soluciones del sistema de ecuaciones.
 
-En esta versi\'on se consideran \'unicamente las interacciones entre los lobos y las ovejas. Se supone que las ovejas tienen alimento infinito.
+\section{Soluci\'on num\'erica}
+\label{sec:solnum}
 
+Se resuelve de manera num\'erica el sistema de ecuaciones con la ayuda del solver \texttt{ode23} de \textit{MATLAB}. Las figuras \ref{lotka1} y \ref{lotkac} muestran dos soluciones con distintos par\'ametros y condiciones iniciales. 
 
-%% The Appendices part is started with the command \appendix;
-%% appendix sections are then done as normal sections
-%% \appendix
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{lotka1.eps}
+	\caption{Soluci\'on al sistema de Lotka-Volterra con $\alpha = 0.1$, $\beta = 0.02$, $\gamma = 0.1$, $\delta = 0.02$ y condiciones iniciales $S(0) = 30$, $W(0) = 30$.}
+	\label{lotka1}
+\end{figure}
 
-%% \section{}
-%% \label{}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{lotkac.eps}
+	\caption{Soluci\'on al sistema de Lotka-Volterra con $\alpha = 2$, $\beta = 2$, $\gamma = 2$, $\delta = 1$ y condiciones iniciales $S(0) = 2$, $W(0) = 3$.}
+	\label{lotkac}
+\end{figure}
 
-%% If you have bibdatabase file and want bibtex to generate the
-%% bibitems, please use
-%%
-%%  \bibliographystyle{elsarticle-num} 
-%%  \bibliography{<your bibdatabase>}
+Se observa que las soluciones al sistema, esto es, las poblaciones de ambas especies, presentan un comportamiento peri\'odico.
 
-%% else use the following coding to input the bibitems directly in the
-%% TeX file.
+\section{Simulaci\'on}
+\label{sec:sim}
 
-\begin{thebibliography}{00}
+El objetivo es realizar dos simulaciones, una para la din\'amica entre las especies lobo-oveja y otra donde se incluya el alimento de las ovejas, esto es, una simulaci\'on para la din\'amica lobo-oveja-pasto.
 
-%% \bibitem{label}
-%% Text of bibliographic item
+\subsection{Lobos-Ovejas}
+\label{subsec:lo}
 
-\bibitem{}
+En esta versi\'on se cosidera unicamente la interacci\'on entre lobos y ovejas, la poblaci\'on inicial total se fija en $n=60$. 
 
-\end{thebibliography}
+La simulaci\'on funciona de la siguiente manera: de manera aleatoria se determina la cantidad de individuos que habr\'a de cada especie en el estado inicial, ambas especies se mueven de manera aleatoria en una pradera que queda determinada por el cuadrado unitario. A cada lobo se le asigna una energ\'ia que tambi\'en se determina de manera aleatoria en el conjunto $\{1, ..., 5\}$. 
+
+En cada iteraci\'on en el tiempo, para cada lobo se calcula la distancia $d$ con las ovejas, si $d \leq r$ la oveja muere; $r$ radio de alimentaci\'on de los lobos. Si el lobo come, gana energ\'ia de lo contrario la pierde en la mitad de una unidad.
+
+En el caso de las ovejas, se supone que tienen alimento infinito, por lo que no ganan ni pierden energ\'ia. Su muerte se ve afectada por los lobos y de acuerdo a una probabiblidad $p_{mo}$.
+
+Se permite la reproducci\'on de ambas especies con una probabilidad fija, $p_{rl}$ en el caso de los lobos y $p_{ro}$ en el caso de las ovejas. %Si la poblaci\'on de ovejas es nula, la probabilidad de reproduci\'on de lobos disminuir\'a con el paso del tiempo.
+
+Adem\'as de la muerte por falta de alimento, los lobos mueren de forma natural con una probabilidad fija $p_{ml}$. 
+
+\subsection{Pasto}
+\label{subsec:pasto}
+
+Con el objetivo de hacer m\'as realista la simulaci\'on se propone una modificaci\'on: limitar el alimento de las ovejas, de esta forma las ovejas tambi\'en tendr\'an energ\'ia que aumentar\'a o disminuir\'a dependiendo del consumo de alimento. 
+
+La pradera se implementa como un aut\'omata celular. Se trabaja con una malla de 10 $\times$ 10. La supervivencia de cada celda se determinar\'a de acuerdo a las celdas vecinas y la cantidad de ovejas sit\'uan en la misma. En la figura \ref{pasto} se muestra el comportamiento que tiene el aut\'omata de acuerdo a las reglas establecidas.
+
+\begin{figure}[htbp]
+\centering
+\subfigure[Inicio]{\includegraphics[scale=0.2]{pasto-00.png}}
+\subfigure[Paso1]{\includegraphics[scale=0.2]{pasto-01.png}}
+\subfigure[Paso2]{\includegraphics[scale=0.2]{pasto-02.png}}
+\subfigure[Paso3]{\includegraphics[scale=0.2]{pasto-03.png}}
+\caption{Comportamiento de la pradera.} 
+\label{pasto}
+\end{figure}
+
+\section{Resultados}
+\label{sec:resul}
+
+La din\'amica del ecosistema depende de diversos factores tales como las condiciones iniciales, la probabilidad de reproducci\'on y muerte de ambas especies y el radio de alimentaci\'on.
+
+Se realizaron varias pruebas para observar los efectos de algunos de estos factores. En el caso de las condiciones iniciales, se var\'ia la poblaci\'on de lobos dejando los de\'as par\'ametros fijos. Para cada variaci\'on en la poblaci\'on inicial se realizaron 10 r\'eplicas. La figura \ref{ovejas} podemos observar un comportamiento que es de esperarse, mientras aumente la cantidad de lobos en la poblaci\'on inicial, la poblaci\'on de ovejas disminuir\'a.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.45]{ovejitas.png}
+	\caption{Variaci\'on en el promedio de la poblaci\'on de ovejas de acuerdo a la cantidad de lobos en la poblaci\'on inicial.}
+	\label{ovejas}
+\end{figure}
+ 
+\section{Conclusiones}
+\label{sec:con}
+
+El sistema de ecuaciones no representa de manera eficaz la realidad del ecosistema ya que tiene muchas simpleficaciones. El enfoque del sistema multiagente permite simular de manera m\'as realista la din\'amica del sistema.
+
+Se pueden realizar varias mejorar con el fin de aumentar el realismo en la simulaci\'on: a\~nadir sexo a los agentes para que la reproducci\'on se de de la forma correcta, velocidad de movimiento que dependa de la especie, considerar distintos n\'ucleos en el pasto, entre otras.
+
+\bibliographystyle{plain}
+\bibliography{bibliop}
+\markboth{}{Referencias}
+\nocite{*}
+
 \end{document}
-\endinput
-%%
-%% End of file `elsarticle-template-num.tex'.
